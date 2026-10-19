@@ -1,0 +1,71 @@
+---
+- name: Deploy the same application with environment specific settings
+  hosts: web
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Validate the environment settings
+      ansible.builtin.assert:
+        that:
+          - app_environment in ['development', 'staging', 'production']
+          - app_log_level in ['info', 'notice', 'warn', 'error']
+          - app_debug is boolean
+        quiet: true
+
+    - name: Create the application directory
+      ansible.builtin.file:
+        path: "{{ app_root }}"
+        state: directory
+        owner: "{{ app_owner }}"
+        group: "{{ app_owner }}"
+        mode: "0755"
+
+    - name: Deploy the application page from one shared template
+      ansible.builtin.template:
+        src: ../templates/index.html.j2
+        dest: "{{ app_root }}/index.html"
+        owner: "{{ app_owner }}"
+        group: "{{ app_owner }}"
+        mode: "0644"
+
+    - name: Deploy the environment configuration as JSON
+      ansible.builtin.template:
+        src: ../templates/config.json.j2
+        dest: "{{ app_root }}/config.json"
+        owner: "{{ app_owner }}"
+        group: "{{ app_owner }}"
+        mode: "0644"
+
+    - name: Deploy and validate the Nginx configuration
+      ansible.builtin.template:
+        src: ../templates/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+        mode: "0644"
+        validate: /usr/sbin/nginx -t -c %s
+      notify: Reload Nginx
+
+    - name: Apply any pending Nginx reload before verification
+      ansible.builtin.meta: flush_handlers
+
+    - name: Verify the running environment health endpoint
+      ansible.builtin.uri:
+        url: http://127.0.0.1/health
+        return_content: true
+        status_code: 200
+      register: app_health
+      until: app_health.json.environment | default('') == app_environment
+      retries: 5
+      delay: 1
+      when: not ansible_check_mode
+
+    - name: Confirm the running server uses the requested environment
+      ansible.builtin.assert:
+        that:
+          - app_health.json.environment == app_environment
+        quiet: true
+      when: not ansible_check_mode
+
+  handlers:
+    - name: Reload Nginx
+      ansible.builtin.command: /usr/sbin/nginx -s reload

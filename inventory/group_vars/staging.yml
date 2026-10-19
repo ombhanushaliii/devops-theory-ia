@@ -1,0 +1,7 @@
+---
+app_environment: staging
+app_debug: false
+app_log_level: notice
+app_banner: Staging environment for review before release
+app_accent: "#a16207"
+app_public_port: 8082

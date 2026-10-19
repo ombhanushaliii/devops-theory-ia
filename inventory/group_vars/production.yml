@@ -1,0 +1,7 @@
+---
+app_environment: production
+app_debug: false
+app_log_level: warn
+app_banner: Production environment ready for users
+app_accent: "#087f5b"
+app_public_port: 8083

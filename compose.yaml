@@ -1,0 +1,67 @@
+name: ansible-theory-ia
+
+x-controller-image: &controller-image
+  image: ansible-theory-ia-controller:local
+  build:
+    context: .
+    dockerfile: Dockerfile.controller
+
+x-node: &node
+  image: ansible-theory-ia-node:local
+  build:
+    context: .
+    dockerfile: Dockerfile.node
+  depends_on:
+    bootstrap:
+      condition: service_completed_successfully
+  volumes:
+    - public_keys:/run/ansible-public:ro
+  healthcheck:
+    test: ["CMD-SHELL", "curl -fsS http://localhost/ > /dev/null && /usr/sbin/sshd -t"]
+    interval: 3s
+    timeout: 3s
+    retries: 15
+
+services:
+  bootstrap:
+    <<: *controller-image
+    command: ["sh", "/usr/local/bin/bootstrap.sh"]
+    volumes:
+      - private_keys:/run/ssh
+      - public_keys:/run/ansible-public
+
+  development:
+    <<: *node
+    hostname: development
+    ports:
+      - "127.0.0.1:8081:80"
+
+  staging:
+    <<: *node
+    hostname: staging
+    ports:
+      - "127.0.0.1:8082:80"
+
+  production:
+    <<: *node
+    hostname: production
+    ports:
+      - "127.0.0.1:8083:80"
+
+  controller:
+    <<: *controller-image
+    profiles: ["tools"]
+    depends_on:
+      development:
+        condition: service_healthy
+      staging:
+        condition: service_healthy
+      production:
+        condition: service_healthy
+    volumes:
+      - .:/workspace:ro
+      - private_keys:/run/ssh:ro
+
+volumes:
+  private_keys:
+  public_keys:

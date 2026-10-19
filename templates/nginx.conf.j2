@@ -1,0 +1,26 @@
+user www-data;
+worker_processes auto;
+pid /run/nginx.pid;
+error_log /var/log/nginx/error.log {{ app_log_level }};
+
+events { worker_connections 128; }
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+    access_log /var/log/nginx/access.log;
+    server {
+        listen 80 default_server;
+        server_name _;
+        root {{ app_root }};
+        index index.html;
+        add_header X-Lab-Environment "{{ app_environment }}" always;
+        add_header X-Lab-Log-Level "{{ app_log_level }}" always;
+        add_header Cache-Control "no-store" always;
+        location / { try_files $uri $uri/ =404; }
+        location = /health {
+            default_type application/json;
+            return 200 '{"status":"ok","environment":"{{ app_environment }}"}';
+        }
+    }
+}

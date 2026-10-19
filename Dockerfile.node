@@ -1,0 +1,14 @@
+FROM debian:bookworm-slim
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    nginx openssh-server python3 sudo curl \
+    && rm -rf /var/lib/apt/lists/* \
+    && useradd -m -s /bin/bash ansible \
+    && passwd -d ansible \
+    && printf 'ansible ALL=(ALL) NOPASSWD: ALL\n' > /etc/sudoers.d/ansible \
+    && chmod 0440 /etc/sudoers.d/ansible \
+    && mkdir -p /run/sshd
+COPY docker/sshd_config /etc/ssh/sshd_config
+COPY docker/start-node.sh /usr/local/bin/start-node.sh
+RUN sed -i 's/\r$//' /usr/local/bin/start-node.sh
+EXPOSE 22 80
+CMD ["sh", "/usr/local/bin/start-node.sh"]

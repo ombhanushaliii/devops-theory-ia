@@ -1,0 +1,7 @@
+---
+app_environment: development
+app_debug: true
+app_log_level: info
+app_banner: Development environment for testing new changes
+app_accent: "#2563eb"
+app_public_port: 8081

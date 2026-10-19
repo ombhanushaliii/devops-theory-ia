@@ -1,0 +1,4 @@
+---
+app_name: Campus Helpdesk
+app_root: /var/www/ansible-lab
+app_owner: www-data

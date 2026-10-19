@@ -1,0 +1,12 @@
+Port 22
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+PermitRootLogin no
+PubkeyAuthentication yes
+PasswordAuthentication no
+KbdInteractiveAuthentication no
+PermitEmptyPasswords no
+AuthorizedKeysFile /run/ansible-public/authorized_keys
+UsePAM no
+AllowUsers ansible
+Subsystem sftp internal-sftp
