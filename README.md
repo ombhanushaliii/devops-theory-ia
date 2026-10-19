@@ -4,17 +4,11 @@ A theory IA project with a practical configuration-management demonstration. One
 
 The project uses a Linux Ansible controller and three Linux managed nodes in Docker containers. Ansible makes real SSH connections to the nodes. Docker provides the lab machines; Ansible writes their application and Nginx configuration.
 
-## Report and presentation
+## Report and demo
 
-- [Editable report](deliverables/Ansible-Theory-IA-Report.docx): 20 pages following the supplied report format, with two student-detail slots.
-- [Report PDF](deliverables/Ansible-Theory-IA-Report.pdf): the matching rendered report.
-- [Presentation](deliverables/Ansible-Theory-IA-Presentation.pptx): 12 editable slides with speaker notes.
-- [Live demo guide](docs/DEMO-GUIDE.md): copy-ready Windows and macOS commands with explanations.
-- [Two-person demo running order](docs/DEMO-RUNNING-ORDER.md): six selected PPT slides, timing and the handover checkpoint.
-- [Presenter 1 script](docs/PRESENTER-1-SCRIPT.md): exact introduction, file explanations and baseline deployment.
-- [Presenter 2 script](docs/PRESENTER-2-SCRIPT.md): exact repeat-run, production-update and conclusion script.
-- [Viva guide](docs/VIVA-GUIDE.md): definitions and likely questions.
-- [Presenter notes](docs/PRESENTER-NOTES.md): a separate copy of the slide notes.
+- [Editable report](deliverables/Ansible-Theory-IA-Report.docx): report document with student-detail slots.
+- [Report PDF](deliverables/Ansible-Theory-IA-Report.pdf): rendered report.
+- [Live demo guide](docs/DEMO-GUIDE.md): Windows and macOS setup and commands.
 
 The local demonstration was verified on Windows on 19 October 2026. Recorded evidence confirms baseline deployment, unchanged reruns, a preview without deployment changes, and an update confined to production. The same container-based commands are documented for macOS; they have not been executed on a Mac in this verification.
 
@@ -95,8 +89,7 @@ For a fresh first-deployment demonstration, run `docker compose down` and then s
 | `compose.yaml` | Creates the controller and managed nodes |
 | `docker/` | Prepares SSH access and starts the lab servers |
 | `docs/DEMO-GUIDE.md` | Step-by-step presenter instructions |
-| `docs/VIVA-GUIDE.md` | Plain-language explanations and likely questions |
-| `deliverables/` | Report and presentation when generated |
+| `deliverables/` | Report document and PDF |
 | `evidence/` | Actual validation logs and server responses when recorded |
 
 ## Scope
