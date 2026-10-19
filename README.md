@@ -10,6 +10,9 @@ The project uses a Linux Ansible controller and three Linux managed nodes in Doc
 - [Report PDF](deliverables/Ansible-Theory-IA-Report.pdf): the matching rendered report.
 - [Presentation](deliverables/Ansible-Theory-IA-Presentation.pptx): 12 editable slides with speaker notes.
 - [Live demo guide](docs/DEMO-GUIDE.md): copy-ready Windows and macOS commands with explanations.
+- [Two-person demo running order](docs/DEMO-RUNNING-ORDER.md): six selected PPT slides, timing and the handover checkpoint.
+- [Presenter 1 script](docs/PRESENTER-1-SCRIPT.md): exact introduction, file explanations and baseline deployment.
+- [Presenter 2 script](docs/PRESENTER-2-SCRIPT.md): exact repeat-run, production-update and conclusion script.
 - [Viva guide](docs/VIVA-GUIDE.md): definitions and likely questions.
 - [Presenter notes](docs/PRESENTER-NOTES.md): a separate copy of the slide notes.
 
