@@ -1,0 +1,48 @@
+ Container ansible-theory-ia-staging-1 Running 
+ Container ansible-theory-ia-production-1 Running 
+ Container ansible-theory-ia-development-1 Running 
+ Container ansible-theory-ia-bootstrap-1 Starting 
+ Container ansible-theory-ia-bootstrap-1 Started 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-production-1 Waiting 
+ Container ansible-theory-ia-development-1 Waiting 
+ Container ansible-theory-ia-staging-1 Waiting 
+ Container ansible-theory-ia-staging-1 Healthy 
+ Container ansible-theory-ia-development-1 Healthy 
+ Container ansible-theory-ia-production-1 Healthy 
+ Container ansible-theory-ia-controller-run-fedc9d01a253 Creating 
+ Container ansible-theory-ia-controller-run-fedc9d01a253 Created 
+
+PLAY [Deploy the same application with environment specific settings] **********
+
+TASK [Validate the environment settings] ***************************************
+ok: [prod-server]
+
+TASK [Create the application directory] ****************************************
+ok: [prod-server]
+
+TASK [Deploy the application page from one shared template] ********************
+ok: [prod-server]
+
+TASK [Deploy the environment configuration as JSON] ****************************
+ok: [prod-server]
+
+TASK [Deploy and validate the Nginx configuration] *****************************
+ok: [prod-server]
+
+TASK [Apply any pending Nginx reload before verification] **********************
+
+TASK [Verify the running environment health endpoint] **************************
+ok: [prod-server]
+
+TASK [Confirm the running server uses the requested environment] ***************
+ok: [prod-server]
+
+PLAY RECAP *********************************************************************
+prod-server                : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

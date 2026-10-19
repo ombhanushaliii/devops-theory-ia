@@ -1,0 +1,28 @@
+ Container ansible-theory-ia-development-1 Running 
+ Container ansible-theory-ia-staging-1 Running 
+ Container ansible-theory-ia-production-1 Running 
+ Container ansible-theory-ia-bootstrap-1 Starting 
+ Container ansible-theory-ia-bootstrap-1 Started 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-staging-1 Waiting 
+ Container ansible-theory-ia-production-1 Waiting 
+ Container ansible-theory-ia-development-1 Waiting 
+ Container ansible-theory-ia-development-1 Healthy 
+ Container ansible-theory-ia-production-1 Healthy 
+ Container ansible-theory-ia-staging-1 Healthy 
+ Container ansible-theory-ia-controller-run-4f519dda7fc9 Creating 
+ Container ansible-theory-ia-controller-run-4f519dda7fc9 Created 
+@all:
+  |--@ungrouped:
+  |--@web:
+  |  |--@development:
+  |  |  |--dev-server
+  |  |--@staging:
+  |  |  |--staging-server
+  |  |--@production:
+  |  |  |--prod-server

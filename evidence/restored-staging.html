@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Helpdesk — staging</title>
+  <style>
+    :root { --accent: #a16207; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, sans-serif; background: #f4f6f8; color: #192b36; }
+    header { padding: 24px 8%; background: #fff; border-bottom: 1px solid #dce3e8; display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+    header strong { font-size: 20px; } header span { color: var(--accent); font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; }
+    main { max-width: 1000px; margin: 62px auto; padding: 0 30px; }
+    .label { color: var(--accent); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; }
+    h1 { font-size: clamp(30px, 5vw, 48px); line-height: 1.15; margin: 14px 0 20px; letter-spacing: -1.4px; }
+    .intro { color: #526672; font-size: 18px; line-height: 1.65; max-width: 760px; }
+    h2 { font-size: 20px; margin-top: 42px; } table { width: 100%; border-collapse: collapse; background: white; }
+    th, td { text-align: left; padding: 17px 20px; border: 1px solid #dce3e8; } th { width: 38%; color: #526672; font-weight: 500; }
+    a { color: var(--accent); } .foot { margin-top: 26px; color: #637782; font-size: 14px; line-height: 1.6; }
+  </style>
+</head>
+<body>
+  <header><strong>Campus Helpdesk</strong><span>staging</span></header>
+  <main>
+    <div class="label">Environment configuration with Ansible</div>
+    <h1>Staging environment for review before release</h1>
+    <p class="intro">One application template serves each environment. Ansible supplies the values below from environment variables defined in the project inventory.</p>
+    <h2>Applied configuration</h2>
+    <table aria-label="Applied environment settings">
+      <tr><th scope="row">Environment</th><td>staging</td></tr>
+      <tr><th scope="row">Debug configuration flag</th><td>Disabled</td></tr>
+      <tr><th scope="row">Nginx error log level</th><td>notice</td></tr>
+      <tr><th scope="row">Browser port</th><td>8082</td></tr>
+    </table>
+    <p class="foot"><a href="/config.json">View the deployed JSON configuration</a> &nbsp; / &nbsp; <a href="/health">Check server health</a><br>The debug flag illustrates application configuration. This static demo has no framework debugger.</p>
+  </main>
+</body>
+</html>

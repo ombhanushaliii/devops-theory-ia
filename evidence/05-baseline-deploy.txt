@@ -1,0 +1,73 @@
+ Container ansible-theory-ia-development-1 Running 
+ Container ansible-theory-ia-staging-1 Running 
+ Container ansible-theory-ia-production-1 Running 
+ Container ansible-theory-ia-bootstrap-1 Starting 
+ Container ansible-theory-ia-bootstrap-1 Started 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-development-1 Waiting 
+ Container ansible-theory-ia-staging-1 Waiting 
+ Container ansible-theory-ia-production-1 Waiting 
+ Container ansible-theory-ia-development-1 Healthy 
+ Container ansible-theory-ia-production-1 Healthy 
+ Container ansible-theory-ia-staging-1 Healthy 
+ Container ansible-theory-ia-controller-run-c5f14e6b5540 Creating 
+ Container ansible-theory-ia-controller-run-c5f14e6b5540 Created 
+
+PLAY [Deploy the same application with environment specific settings] **********
+
+TASK [Validate the environment settings] ***************************************
+ok: [dev-server]
+ok: [staging-server]
+ok: [prod-server]
+
+TASK [Create the application directory] ****************************************
+changed: [dev-server]
+changed: [staging-server]
+changed: [prod-server]
+
+TASK [Deploy the application page from one shared template] ********************
+changed: [prod-server]
+changed: [dev-server]
+changed: [staging-server]
+
+TASK [Deploy the environment configuration as JSON] ****************************
+changed: [dev-server]
+changed: [staging-server]
+changed: [prod-server]
+
+TASK [Deploy and validate the Nginx configuration] *****************************
+changed: [dev-server]
+changed: [staging-server]
+changed: [prod-server]
+
+TASK [Apply any pending Nginx reload before verification] **********************
+
+TASK [Apply any pending Nginx reload before verification] **********************
+
+TASK [Apply any pending Nginx reload before verification] **********************
+
+RUNNING HANDLER [Reload Nginx] *************************************************
+changed: [staging-server]
+changed: [prod-server]
+changed: [dev-server]
+
+TASK [Verify the running environment health endpoint] **************************
+ok: [prod-server]
+ok: [staging-server]
+ok: [dev-server]
+
+TASK [Confirm the running server uses the requested environment] ***************
+ok: [dev-server]
+ok: [staging-server]
+ok: [prod-server]
+
+PLAY RECAP *********************************************************************
+dev-server                 : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+prod-server                : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+staging-server             : ok=8    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

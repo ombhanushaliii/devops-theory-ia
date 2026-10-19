@@ -1,0 +1,105 @@
+ Container ansible-theory-ia-development-1 Running 
+ Container ansible-theory-ia-staging-1 Running 
+ Container ansible-theory-ia-production-1 Running 
+ Container ansible-theory-ia-bootstrap-1 Starting 
+ Container ansible-theory-ia-bootstrap-1 Started 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-development-1 Waiting 
+ Container ansible-theory-ia-staging-1 Waiting 
+ Container ansible-theory-ia-production-1 Waiting 
+ Container ansible-theory-ia-production-1 Healthy 
+ Container ansible-theory-ia-staging-1 Healthy 
+ Container ansible-theory-ia-development-1 Healthy 
+ Container ansible-theory-ia-controller-run-31886edd3cae Creating 
+ Container ansible-theory-ia-controller-run-31886edd3cae Created 
+
+PLAY [Deploy the same application with environment specific settings] **********
+
+TASK [Validate the environment settings] ***************************************
+ok: [prod-server]
+
+TASK [Create the application directory] ****************************************
+ok: [prod-server]
+
+TASK [Deploy the application page from one shared template] ********************
+--- before: /var/www/ansible-lab/index.html
++++ after: /tmp/ansible-local/ansible-local-1d1adgofk/tmpz_vw8o6o/index.html.j2
+@@ -23,13 +23,13 @@
+   <header><strong>Campus Helpdesk</strong><span>production</span></header>
+   <main>
+     <div class="label">Environment configuration with Ansible</div>
+-    <h1>Production environment ready for users</h1>
++    <h1>Production settings updated using Ansible</h1>
+     <p class="intro">One application template serves each environment. Ansible supplies the values below from environment variables defined in the project inventory.</p>
+     <h2>Applied configuration</h2>
+     <table aria-label="Applied environment settings">
+       <tr><th scope="row">Environment</th><td>production</td></tr>
+       <tr><th scope="row">Debug configuration flag</th><td>Disabled</td></tr>
+-      <tr><th scope="row">Nginx error log level</th><td>warn</td></tr>
++      <tr><th scope="row">Nginx error log level</th><td>error</td></tr>
+       <tr><th scope="row">Browser port</th><td>8083</td></tr>
+     </table>
+     <p class="foot"><a href="/config.json">View the deployed JSON configuration</a> &nbsp; / &nbsp; <a href="/health">Check server health</a><br>The debug flag illustrates application configuration. This static demo has no framework debugger.</p>
+
+changed: [prod-server]
+
+TASK [Deploy the environment configuration as JSON] ****************************
+--- before: /var/www/ansible-lab/config.json
++++ after: /tmp/ansible-local/ansible-local-1d1adgofk/tmpx4anhfm7/config.json.j2
+@@ -1,8 +1,8 @@
+ {
+     "application": "Campus Helpdesk",
+-    "banner": "Production environment ready for users",
++    "banner": "Production settings updated using Ansible",
+     "debug": false,
+     "environment": "production",
+-    "log_level": "warn",
++    "log_level": "error",
+     "public_port": 8083
+ }
+
+changed: [prod-server]
+
+TASK [Deploy and validate the Nginx configuration] *****************************
+--- before: /etc/nginx/nginx.conf
++++ after: /tmp/ansible-local/ansible-local-1d1adgofk/tmpkzjpl58k/nginx.conf.j2
+@@ -1,7 +1,7 @@
+ user www-data;
+ worker_processes auto;
+ pid /run/nginx.pid;
+-error_log /var/log/nginx/error.log warn;
++error_log /var/log/nginx/error.log error;
+ 
+ events { worker_connections 128; }
+ 
+@@ -15,7 +15,7 @@
+         root /var/www/ansible-lab;
+         index index.html;
+         add_header X-Lab-Environment "production" always;
+-        add_header X-Lab-Log-Level "warn" always;
++        add_header X-Lab-Log-Level "error" always;
+         add_header Cache-Control "no-store" always;
+         location / { try_files $uri $uri/ =404; }
+         location = /health {
+
+changed: [prod-server]
+
+TASK [Apply any pending Nginx reload before verification] **********************
+
+RUNNING HANDLER [Reload Nginx] *************************************************
+skipping: [prod-server]
+
+TASK [Verify the running environment health endpoint] **************************
+skipping: [prod-server]
+
+TASK [Confirm the running server uses the requested environment] ***************
+skipping: [prod-server]
+
+PLAY RECAP *********************************************************************
+prod-server                : ok=5    changed=3    unreachable=0    failed=0    skipped=3    rescued=0    ignored=0   
+

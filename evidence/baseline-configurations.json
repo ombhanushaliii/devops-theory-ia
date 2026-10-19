@@ -1,0 +1,26 @@
+{
+  "development": {
+    "application": "Campus Helpdesk",
+    "banner": "Development environment for testing new changes",
+    "debug": true,
+    "environment": "development",
+    "log_level": "info",
+    "public_port": 8081
+  },
+  "staging": {
+    "application": "Campus Helpdesk",
+    "banner": "Staging environment for review before release",
+    "debug": false,
+    "environment": "staging",
+    "log_level": "notice",
+    "public_port": 8082
+  },
+  "production": {
+    "application": "Campus Helpdesk",
+    "banner": "Production environment ready for users",
+    "debug": false,
+    "environment": "production",
+    "log_level": "warn",
+    "public_port": 8083
+  }
+}

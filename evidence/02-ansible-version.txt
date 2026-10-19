@@ -1,0 +1,28 @@
+ Container ansible-theory-ia-staging-1 Running 
+ Container ansible-theory-ia-production-1 Running 
+ Container ansible-theory-ia-development-1 Running 
+ Container ansible-theory-ia-bootstrap-1 Starting 
+ Container ansible-theory-ia-bootstrap-1 Started 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Waiting 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-bootstrap-1 Exited 
+ Container ansible-theory-ia-production-1 Waiting 
+ Container ansible-theory-ia-development-1 Waiting 
+ Container ansible-theory-ia-staging-1 Waiting 
+ Container ansible-theory-ia-production-1 Healthy 
+ Container ansible-theory-ia-development-1 Healthy 
+ Container ansible-theory-ia-staging-1 Healthy 
+ Container ansible-theory-ia-controller-run-d67b816a9562 Creating 
+ Container ansible-theory-ia-controller-run-d67b816a9562 Created 
+ansible [core 2.19.3]
+  config file = /workspace/ansible.cfg
+  configured module search path = ['/root/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python3.12/site-packages/ansible
+  ansible collection location = /root/.ansible/collections:/usr/share/ansible/collections
+  executable location = /usr/local/bin/ansible
+  python version = 3.12.15 (main, Oct  6 2026, 02:02:31) [GCC 12.2.0] (/usr/local/bin/python3.12)
+  jinja version = 3.1.6
+  pyyaml version = 6.0.3 (with libyaml v0.2.5)

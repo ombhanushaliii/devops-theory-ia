@@ -1,0 +1,156 @@
+{
+  "status": "verified",
+  "recorded_at": "2026-10-19T07:37:37.645732+00:00",
+  "ansible_core": "2.19.3",
+  "checks": [
+    "SSH connectivity for all three targets",
+    "Ansible syntax check",
+    "Different environment settings deployed",
+    "Baseline repeat changed=0 on all targets",
+    "Check-mode preview leaves running configurations unchanged",
+    "Production update leaves development and staging unchanged",
+    "Updated response headers agree with deployed JSON",
+    "Production repeat changed=0",
+    "Baseline restored for the next demo"
+  ],
+  "steps": [
+    {
+      "name": "01-start",
+      "exit_code": 0,
+      "recap": {},
+      "command": "docker compose up -d --no-build development staging production"
+    },
+    {
+      "name": "02-ansible-version",
+      "exit_code": 0,
+      "recap": {},
+      "command": "docker compose run --rm controller ansible --version"
+    },
+    {
+      "name": "03-connectivity",
+      "exit_code": 0,
+      "recap": {},
+      "command": "docker compose run --rm controller ansible web -m ansible.builtin.ping"
+    },
+    {
+      "name": "04-syntax",
+      "exit_code": 0,
+      "recap": {},
+      "command": "docker compose run --rm controller ansible-playbook playbooks/deploy.yml --syntax-check"
+    },
+    {
+      "name": "05-baseline-deploy",
+      "exit_code": 0,
+      "recap": {
+        "dev-server": {
+          "ok": 8,
+          "changed": 5,
+          "unreachable": 0,
+          "failed": 0
+        },
+        "prod-server": {
+          "ok": 8,
+          "changed": 5,
+          "unreachable": 0,
+          "failed": 0
+        },
+        "staging-server": {
+          "ok": 8,
+          "changed": 5,
+          "unreachable": 0,
+          "failed": 0
+        }
+      },
+      "command": "docker compose run --rm controller ansible-playbook playbooks/deploy.yml"
+    },
+    {
+      "name": "06-baseline-repeat",
+      "exit_code": 0,
+      "recap": {
+        "dev-server": {
+          "ok": 7,
+          "changed": 0,
+          "unreachable": 0,
+          "failed": 0
+        },
+        "prod-server": {
+          "ok": 7,
+          "changed": 0,
+          "unreachable": 0,
+          "failed": 0
+        },
+        "staging-server": {
+          "ok": 7,
+          "changed": 0,
+          "unreachable": 0,
+          "failed": 0
+        }
+      },
+      "command": "docker compose run --rm controller ansible-playbook playbooks/deploy.yml"
+    },
+    {
+      "name": "07-preview-production",
+      "exit_code": 0,
+      "recap": {
+        "prod-server": {
+          "ok": 5,
+          "changed": 3,
+          "unreachable": 0,
+          "failed": 0
+        }
+      },
+      "command": "docker compose run --rm controller ansible-playbook playbooks/deploy.yml --limit production -e @demo/production-update.yml --check --diff"
+    },
+    {
+      "name": "08-apply-production-update",
+      "exit_code": 0,
+      "recap": {
+        "prod-server": {
+          "ok": 8,
+          "changed": 4,
+          "unreachable": 0,
+          "failed": 0
+        }
+      },
+      "command": "docker compose run --rm controller ansible-playbook playbooks/deploy.yml --limit production -e @demo/production-update.yml"
+    },
+    {
+      "name": "09-production-repeat",
+      "exit_code": 0,
+      "recap": {
+        "prod-server": {
+          "ok": 7,
+          "changed": 0,
+          "unreachable": 0,
+          "failed": 0
+        }
+      },
+      "command": "docker compose run --rm controller ansible-playbook playbooks/deploy.yml --limit production -e @demo/production-update.yml"
+    },
+    {
+      "name": "10-restore-baseline",
+      "exit_code": 0,
+      "recap": {
+        "dev-server": {
+          "ok": 7,
+          "changed": 0,
+          "unreachable": 0,
+          "failed": 0
+        },
+        "prod-server": {
+          "ok": 8,
+          "changed": 4,
+          "unreachable": 0,
+          "failed": 0
+        },
+        "staging-server": {
+          "ok": 7,
+          "changed": 0,
+          "unreachable": 0,
+          "failed": 0
+        }
+      },
+      "command": "docker compose run --rm controller ansible-playbook playbooks/deploy.yml"
+    }
+  ]
+}
