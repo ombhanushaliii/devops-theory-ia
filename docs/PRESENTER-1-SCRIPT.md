@@ -1,8 +1,8 @@
 # Presenter 1 script: introduction to baseline deployment
 
-Your part: about 5 to 6 minutes plus command execution. You introduce the project, explain the files, check connections, deploy the baseline and show the three environments. Then your friend takes over.
+Your part: about 5 to 6 minutes plus command execution. You introduce the project, explain the files, check connections, deploy the baseline and show the three environments. Then your teammate continues on their own laptop.
 
-Use the same laptop throughout. Start the lab using `docs/DEMO-RUNNING-ORDER.md`. Presenter 2 needs the running baseline you create.
+You and Presenter 2 use **separate laptops**. Prepare your lab using `docs/DEMO-RUNNING-ORDER.md`. Your teammate prepares the same baseline checkpoint on their machine before class. You do not hand over your laptop or your running containers.
 
 **SAY** means read the paragraph aloud. **DO**, **RUN** and **CHECK** are instructions for you. Commands work in Windows PowerShell and macOS Terminal after entering the project directory.
 
@@ -44,7 +44,7 @@ Use the same laptop throughout. Start the lab using `docs/DEMO-RUNNING-ORDER.md`
 
 "The debug flag is a sample application setting displayed in our page and JSON. This is a static website, so that flag does not start a real application debugger. The Nginx log level does change the web server's actual configuration."
 
-"The three browser ports let us visit each environment separately on one laptop. Docker Compose maps these ports to the corresponding web servers."
+"The three browser ports let us visit each environment separately on this laptop. Docker Compose maps these ports to the corresponding web servers."
 
 ## 4. Show the actual source files
 
@@ -162,10 +162,10 @@ Do not promise a particular changed count. The recorded fresh installation had f
 
 "This JSON is a file Ansible generated on the production server. It shows the configuration we just deployed."
 
-**CHECK:** Production's banner reads **Production environment ready for users** and its log level is **warn**. Leave the production tab open. Leave the terminal in the same project directory.
+**CHECK:** Production's banner reads **Production environment ready for users** and its log level is **warn**.
 
 **SAY, EXACT HANDOVER:**
 
 "We have now deployed the original settings to all three environments. My teammate will show how Ansible handles the same request again, then preview and apply a change to production alone."
 
-**DO:** Hand the laptop controls to your friend. Your speaking part is complete. Let your friend deliver the conclusion too, so there is only one handover.
+**DO:** Stop speaking. Disconnect your laptop from the projector or screen share so Presenter 2 can connect theirs. Your speaking part is complete. Let your teammate deliver the conclusion too, so there is only one handover.

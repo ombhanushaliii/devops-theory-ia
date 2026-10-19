@@ -1,14 +1,14 @@
 # Presenter 2 script: repeat runs, production update and conclusion
 
-Your part: about 5 to 6 minutes plus command execution. You start immediately after Presenter 1 shows the baseline environments. You demonstrate idempotence, preview a production change, apply it, verify that only production changed, repeat it and close the presentation.
+Your part: about 5 to 6 minutes plus command execution. You start after Presenter 1 finishes the baseline demo. You demonstrate idempotence, preview a production change, apply it, verify that only production changed, repeat it and close the presentation.
 
-Use the same laptop, terminal and browser tabs as Presenter 1. Docker and all three servers should already be running. Do not restart the lab at the handover.
+You and Presenter 1 use **separate laptops**. Before class, prepare your own lab to the baseline checkpoint using `docs/DEMO-RUNNING-ORDER.md`. You do not take over Presenter 1's terminal, browser or containers. When they finish, connect your laptop to the display and continue from here.
 
 **SAY** means read the paragraph aloud. **DO**, **RUN** and **CHECK** are instructions for you. Run one command at a time and wait for the prompt.
 
 ## Your starting point
 
-Before starting your spoken part, confirm Presenter 1 has shown the following baseline:
+Before connecting to the display, confirm your laptop already matches this baseline:
 
 | Environment | Browser URL | Log level |
 |---|---|---|
@@ -17,6 +17,13 @@ Before starting your spoken part, confirm Presenter 1 has shown the following ba
 | Production | http://localhost:8083 | warn |
 
 Production's banner should read **Production environment ready for users**. The baseline playbook must have finished with `failed=0` and `unreachable=0` for all three hosts.
+
+If anything is missing, run these on your laptop before going on screen:
+
+```text
+docker compose up -d --build development staging production
+docker compose run --rm controller ansible-playbook playbooks/deploy.yml
+```
 
 The terminal should already be in the project folder. Only if you open a new terminal, run the appropriate directory command:
 
@@ -32,9 +39,11 @@ macOS, assuming the project is in your home folder:
 cd ~/ansible-theory-ia
 ```
 
+Open PowerPoint, the editor, the three browser tabs and the terminal before Presenter 1 finishes. At handover, switch the display to your laptop and begin at section 1.
+
 ## 1. Explain idempotence
 
-**DO:** Return to PowerPoint and jump to slide **8**, **An unchanged rerun**.
+**DO:** Show PowerPoint slide **8**, **An unchanged rerun**.
 
 **SAY:**
 
@@ -186,7 +195,7 @@ docker compose run --rm controller ansible-playbook playbooks/deploy.yml --limit
 
 "This reduces repeated manual editing and makes the configuration process easier to repeat. Thank you. We are ready for questions."
 
-**DO:** Stop speaking here. Leave the lab running for questions. You do not need to run GitHub Actions or push anything during this demonstration.
+**DO:** Stop speaking here. Leave your lab running for questions. You do not need to run GitHub Actions or push anything during this demonstration.
 
 ## Short answers if the examiner asks
 
